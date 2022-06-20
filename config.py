@@ -7,4 +7,4 @@ except:
     print(".Token not found")
     raise SystemExit
 
-gitlab_url = "https://gitlab.com/babidi34/api/v4/projects"
+gitlab_url = "https://gitlab.com/api/v4/projects/?owned=true"
