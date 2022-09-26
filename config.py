@@ -1,10 +1,20 @@
 
 
 try:
-    token_file = open(".token")
-    token = token_file.read()
+    token_file = open(".token_gitlab")
+    token_gitlab = token_file.read()
 except:
-    print(".Token not found")
+    print(".Token_gitlab not found")
     raise SystemExit
 
+try:
+    token_file = open(".token_github")
+    token_github = token_file.read()
+except:
+    print(".Token_gitlab not found")
+    raise SystemExit
+
+gitlab_username = "babidi34"
+github_username = "babidi34"
 gitlab_url = "https://gitlab.com/api/v4/projects/?owned=true"
+github_url = "https://api.github.com/user/repos"
