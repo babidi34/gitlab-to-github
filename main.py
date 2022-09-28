@@ -8,4 +8,6 @@ for repo in public_repo_gitlab:
     fonctions.create_repo_github(repo['name'])
     fonctions.cloneGitlab_and_pushGithub(repo)
 
-
+for repo in private_repo_gitlab:
+    fonctions.create_private_repo_github(repo['name'])
+    fonctions.cloneGitlab_and_pushGithub(repo)
