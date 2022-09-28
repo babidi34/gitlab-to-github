@@ -1,7 +1,8 @@
-from config import token_gitlab, token_github, gitlab_url, github_url
+from config import token_gitlab, token_github, gitlab_url, github_url, github_username
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+
 
 def get_repos_gitlab():
     header = {"PRIVATE-TOKEN": token_gitlab}
@@ -25,5 +26,14 @@ def get_repos_private_gitlab():
     return repo_private
 
 def get_repos_github():
-    request = requests.get(github_url,auth = HTTPBasicAuth('babidi34', token_github)).json()
+    request = requests.get(github_url,auth = HTTPBasicAuth(github_username, token_github)).json()
     return request
+
+def create_repo_github(nom_repo):
+    request = requests.post(f"https://api.github.com/user/repos",auth = HTTPBasicAuth(github_username, token_github),json={"name":nom_repo}).json()
+    return request
+
+def delete_repo_github(nom_repo):#not used
+    delete_repo = requests.delete(f"https://api.github.com/repos/babidi34/{nom_repo}",auth = HTTPBasicAuth(github_username, token_github)).json()
+
+
