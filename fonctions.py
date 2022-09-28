@@ -1,7 +1,7 @@
 from config import token_gitlab, token_github, gitlab_url, github_url, github_username, gitlab_username
 import requests
 from requests.auth import HTTPBasicAuth
-import json
+import unidecode
 import tempfile
 from git import Repo
 
@@ -33,11 +33,11 @@ def get_repos_github():
     return request
 
 def create_repo_github(nom_repo):
-    request = requests.post(f"https://api.github.com/user/repos",auth = HTTPBasicAuth(github_username, token_github),json={"name":nom_repo}).json()
+    request = requests.post(f"https://api.github.com/user/repos",auth = HTTPBasicAuth(github_username, token_github),json={"name":unidecode.unidecode(nom_repo)}).json()
     return request
 
 def create_private_repo_github(nom_repo):
-    request = requests.post(f"https://api.github.com/user/repos",auth = HTTPBasicAuth(github_username, token_github),json={"name":nom_repo,"private":"True"}).json()
+    request = requests.post(f"https://api.github.com/user/repos",auth = HTTPBasicAuth(github_username, token_github),json={"name":unidecode.unidecode(nom_repo),"private":"True"}).json()
     return request
 
 
@@ -48,8 +48,8 @@ def cloneGitlab_and_pushGithub(repo):
     with tempfile.TemporaryDirectory() as tmpdirname:
         print('created temporary directory', tmpdirname)
         if repo['visibility'] == 'private':
-            cloned_repo = Repo.clone_from(f"https://{gitlab_username}:{token_gitlab}@gitlab.com/{gitlab_username}/{repo['name']}.git", tmpdirname)
+            cloned_repo = Repo.clone_from(f"https://{gitlab_username}:{token_gitlab}@gitlab.com/{gitlab_username}/{unidecode.unidecode(repo['path'])}.git", tmpdirname)
         else:
             cloned_repo = Repo.clone_from(repo['web_url'], tmpdirname)
-        remote = cloned_repo.create_remote("new", url=f"https://{github_username}:{token_github}@github.com/{github_username}/{repo['name']}.git")
+        remote = cloned_repo.create_remote("new", url=f"https://{github_username}:{token_github}@github.com/{github_username}/{unidecode.unidecode(repo['path'])}.git")
         remote.push(refspec='{}:{}'.format(repo['default_branch'], repo['default_branch']))

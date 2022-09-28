@@ -16,5 +16,7 @@ except:
 
 gitlab_username = "babidi34"
 github_username = "babidi34"
-gitlab_url = "https://gitlab.com/api/v4/projects/?owned=true"
+limit_repo = "50"
+import_private_repo = True
+gitlab_url = f"https://gitlab.com/api/v4/projects/?owned=true&per_page={limit_repo}"
 github_url = "https://api.github.com/user/repos"
