@@ -17,10 +17,14 @@ except:
     try:
         token_github = os.environ.get('token_github')
     except:
-        print(".Token_gitlab not found")
+        print(".Token_github not found")
         raise SystemExit
+try:
+    gitlab_username = os.environ.get('gitlab_username')
+except:
+    print("gitlab_username not found")
+    raise SystemExit
 
-gitlab_username = "babidi34"
 if not os.environ.get('github_username'):
     github_username = gitlab_username
 else:
