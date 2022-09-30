@@ -9,6 +9,7 @@ before_script:
 
 
 push_to_github:
+  stage: push_to_github
   script: python main.py
   rules:
     - if: '$token_gitlab'
