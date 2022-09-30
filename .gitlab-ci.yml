@@ -1,0 +1,16 @@
+image: python:latest
+
+stages:
+
+  - push_to_github
+
+before_script:
+  - pip install -r requirements.txt
+
+
+push_to_github:
+  script: python main.py
+  rules:
+    - if: '$token_gitlab'
+    - if: '$token_github'
+    - if: '$gitlab_username'
