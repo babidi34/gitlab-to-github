@@ -19,23 +19,25 @@ except:
     except:
         print(".Token_github not found")
         raise SystemExit
-try:
-    gitlab_username = os.environ.get('gitlab_username')
-except:
+
+if os.environ.get('gitlab_username') is None:
     print("gitlab_username not found")
     raise SystemExit
-
-if not os.environ.get('github_username'):
-    github_username = gitlab_username
 else:
-    github_username = os.environ.get('github_username')
+    gitlab_username = os.environ.get('gitlab_username')
 
-if os.environ.get('limit_repo'):
+if os.environ.get('github_username') is not None:
+    github_username = os.environ.get('github_username')
+else:
+    github_username = gitlab_username
+
+
+if os.environ.get('limit_repo') is not None:
     limit_repo = os.environ.get('limit_repo')
 else:
     limit_repo = "50"
 
-if os.environ.get('import_private_repo'):
+if os.environ.get('import_private_repo') is not None:
     import_private_repo = True
 else:
     import_private_repo = False
