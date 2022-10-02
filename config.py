@@ -38,7 +38,8 @@ else:
     limit_repo = "50"
 
 if os.environ.get('import_private_repo') is not None:
-    import_private_repo = True
+    if os.environ.get('import_private_repo') == True or os.environ.get('import_private_repo') == "yes":
+        import_private_repo = True
 else:
     import_private_repo = False
 
