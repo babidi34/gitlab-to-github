@@ -2,6 +2,8 @@
 
 read -p "Gitlab username : " gitlab_username
 
+read -p "Github username : " github_username
+
 read -s -p "Gitlab token : " token_gitlab
 
 read -s -p "Github token : " token_github
