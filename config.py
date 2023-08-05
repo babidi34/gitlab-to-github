@@ -4,9 +4,9 @@ try:
     token_file = open(".token_gitlab")
     token_gitlab = token_file.read()
 except:
-    try:
+    if os.environ.get('token_gitlab') is not None:
         token_gitlab = os.environ.get('token_gitlab')
-    except:
+    else:
         print(".Token_gitlab not found")
         raise SystemExit
 
@@ -14,10 +14,10 @@ try:
     token_file = open(".token_github")
     token_github = token_file.read()
 except:
-    try:
+    if os.environ.get('token_github') is not None:
         token_github = os.environ.get('token_github')
-    except:
-        print(".Token_github not found")
+    else:
+        print(".token_github not found")
         raise SystemExit
 
 if os.environ.get('gitlab_username') is None:
